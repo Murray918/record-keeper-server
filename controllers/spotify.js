@@ -5,18 +5,24 @@ client_id = config.CLIENT_ID; // Your client id
 client_secret = config.CLIENT_SECRET; // Your secret
 redirect_uri = 'REDIRECT_URI'; // Your redirect uri
 
-module.exports = function(req, res) {
-	var spotify = new Spotify({
+exports.search = function(req, res, next) {
+	let data = {};
+	const spotify = new Spotify({
 		id: client_id,
 		secret: client_secret
 	});
-
 	spotify
-		.search({ type: 'track', query: 'All the Small Things' })
+		.search({ type: 'album', query: 'Black Messiah', limit: 10 })
 		.then(function(response) {
 			console.log(response);
-		})
-		.catch(function(err) {
-			console.log(err);
+			let data = response.albums.items[0];
+			res.send(response.albums.items);
 		});
+	return data;
+	next();
+};
+
+exports.data = function(next) {
+	let data = this;
+	console.log(data);
 };
