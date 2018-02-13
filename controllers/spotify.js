@@ -5,8 +5,8 @@ client_id = config.CLIENT_ID; // Your client id
 client_secret = config.CLIENT_SECRET; // Your secret
 redirect_uri = 'REDIRECT_URI'; // Your redirect uri
 
-exports.search = function(req, res, next) {
-	let data = {};
+exports.search = function(req, res) {
+	let dataArray = [];
 	const spotify = new Spotify({
 		id: client_id,
 		secret: client_secret
@@ -14,15 +14,20 @@ exports.search = function(req, res, next) {
 	spotify
 		.search({ type: 'album', query: 'Black Messiah', limit: 10 })
 		.then(function(response) {
-			console.log(response);
-			let data = response.albums.items[0];
-			res.send(response.albums.items);
+			// console.log(response);
+			let dataArray = [];
+			let data = response.albums.items.map(function(album) {
+				dataArray.push({
+					id: album.id,
+					artist: album.artists[0].name,
+					title: album.name,
+					imageLarge: album.images[0].url,
+					imageMedium: album.images[1].url,
+					imagesSmall: album.images[2].url,
+					uri: album.uri
+				});
+			});
+			console.log('data has been extracted!!!');
+			res.send(dataArray);
 		});
-	return data;
-	next();
-};
-
-exports.data = function(next) {
-	let data = this;
-	console.log(data);
 };
