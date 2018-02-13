@@ -12,5 +12,5 @@ module.exports = function(app) {
 	});
 	app.post('/signup', Authentication.signup);
 	app.post('/signin', requireSignIn, Authentication.signin);
-	app.get('/spotify', spotify.search);
+	app.get('/spotify/:type/:query', spotify.search);
 };
