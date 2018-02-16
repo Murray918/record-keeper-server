@@ -16,25 +16,23 @@ exports.signin = function(req, res, next) {
 exports.signup = function(req, res, next) {
 	const email = req.body.email;
 	const password = req.body.password;
-	// See if a user with the given email exists
-
+	// make sure there is an email and a password
 	if (!email || !password) {
 		return res
 			.status(422)
 			.send({ error: 'You must provide email and password' });
 	}
-
+	// See if a user with the given email exists
 	User.findOne({ email: email }, function(err, existingUser) {
 		if (err) {
 			return next(err);
 		}
 
 		// If a user with a given email does exist, return an error
-
 		if (existingUser) {
 			return res.status(422).send({ error: 'Email is in use' });
 		}
-
+		// If a user with email does not exist, create and save a user record
 		const user = new User({
 			email: email,
 			password: password
@@ -44,12 +42,8 @@ exports.signup = function(req, res, next) {
 			if (err) {
 				return next(err);
 			}
-
+			// Respond to request indicating that the user was created
 			res.json({ token: tokenForUser(user) });
 		});
 	});
-
-	// If a user with email does not exist, create and save a user record
-
-	// Respond to request indicating that the user was created
 };
