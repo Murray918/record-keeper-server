@@ -1,7 +1,8 @@
 const Authentication = require('./controllers/authentication'),
 	passportService = require('./services/passport'),
 	passport = require('passport'),
-	spotify = require('./controllers/spotify');
+	spotify = require('./controllers/spotify'),
+	UserCollection = require('./controllers/userCollection');
 
 const requireAuth = passport.authenticate('jwt', { session: false });
 const requireSignIn = passport.authenticate('local', { session: false });
@@ -13,4 +14,5 @@ module.exports = function(app) {
 	app.post('/signup', Authentication.signup);
 	app.post('/signin', requireSignIn, Authentication.signin);
 	app.get('/spotify/:type/:query', spotify.search);
+	app.post('/addRecord', UserCollection.addRecord);
 };
