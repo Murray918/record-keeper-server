@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const bcrypt = require('bcrypt-nodejs');
 
-const RecordSchema = new Schema({
+const Record = new Schema({
 	id: String,
 	artist: String,
 	title: String,
@@ -15,8 +15,7 @@ const RecordSchema = new Schema({
 const UserShcema = new Schema({
 	email: { type: String, unique: true, lowercase: true },
 	password: String,
-	username: String,
-	records: [RecordSchema]
+	records: [Record]
 });
 
 // RecordSchema;
