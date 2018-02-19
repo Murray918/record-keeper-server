@@ -1,34 +1,26 @@
 const User = require('../models/user');
 
 exports.addRecord = function(req, res) {
-	//this is our record constructore
-	const record = {
-		id: '1wVO8nHzgcim0IBzbXnYX0',
-		artist: 'Miles Davis',
-		titl: 'Bitches Brew (Legacy Edition)',
-		imageLarge:
-			'https://i.scdn.co/image/e0e76ee2a2e033f561ae8a52af6ae2a0c552fbf1',
-		imageMedium:
-			'https://i.scdn.co/image/dc81e47114ac7e4bed43d363259e08a2aa7d287e',
-		imagesSmall:
-			'https://i.scdn.co/image/c292e73ab0b68309c83d8c2ca9855839304c45b1',
-		uri: 'spotify:album:1wVO8nHzgcim0IBzbXnYX0'
-	};
-	//TODO add record to specific users collection
-	//find the user
-	User.findOne({ email: 'kamurray12@mac.com' }, function(err, user) {
+	//get the and email record from request
+	let record = req.body.record;
+	let email = req.body.email;
+
+	//find the user the record belongs to
+	User.findOne({ email: email }, function(err, user) {
 		console.log(user);
 		if (err) {
-			return next(err, user);
+			res.send(err);
 		}
+		//push it to the document
 		user.records.push(record);
 		console.log(user);
+		//save the document
 		user.save();
-	});
-
-	res.status(200).send({
-		Success: 'you have saved this record to the database',
-		record
+		//return a message that says success
+		res.status(200).send({
+			Success: 'you have saved this record to the database',
+			record
+		});
 	});
 };
 
