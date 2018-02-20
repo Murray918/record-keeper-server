@@ -34,6 +34,10 @@ exports.removeRecord = function(req, res) {
 			res.send(err);
 		}
 		//get the album and remove it
+		console.log(
+			'<<<<<<<<<<<<<<<<<LOOK!>>>>>>>>>>>>>>>>>>>>>',
+			user.records.id(recordId)
+		);
 		user.records.id(recordId).remove();
 		user.save();
 		res.status(200).send('The record was removed');
