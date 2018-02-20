@@ -8,7 +8,7 @@ const express = require('express'),
 	cors = require('cors');
 //connection to mongoose and promise set up
 mongoose.Promise = require('bluebird');
-mongoose.connect('mongodb://localhost:27017/auth', { useMongoClient: true });
+mongoose.connect('mongodb://localhost:27017/auth');
 //this prepares our app
 app.use(morgan('combined'));
 app.use(cors());

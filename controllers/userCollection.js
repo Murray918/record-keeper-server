@@ -1,4 +1,6 @@
 const User = require('../models/user');
+const mongoose = require('mongoose');
+const ObjectId = require('mongoose').ObjectId;
 
 exports.addRecord = function(req, res) {
 	//get the and email record from request
@@ -12,7 +14,7 @@ exports.addRecord = function(req, res) {
 			res.send(err);
 		}
 		//push it to the document
-		user.records.push(record);
+		user.records.unshift(record);
 		console.log(user);
 		//save the document
 		user.save();
@@ -25,13 +27,28 @@ exports.addRecord = function(req, res) {
 };
 
 exports.removeRecord = function(req, res) {
-	//TODO remove record from users collection
-	res.send('this endpoint is under construction');
+	let recordId = req.body.id;
+	let email = req.body.email;
+	User.findOne({ email: email }, function(err, user) {
+		if (err) {
+			res.send(err);
+		}
+		//get the album and remove it
+		user.records.id(recordId).remove();
+		user.save();
+		res.status(200).send('The record was removed');
+	});
 };
 
 exports.viewRecords = function(req, res) {
-	//TODO display users record collection
-	res.send('this endpoint is under construction');
+	console.log(req.params);
+	User.findOne({ email: req.params.email }, function(err, user) {
+		if (err) {
+			res.send(err);
+		}
+		let found = user;
+		res.status(200).send(user.records);
+	});
 };
 
 exports.updateUser = function(req, res) {

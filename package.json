@@ -1,27 +1,27 @@
 {
-  "name": "server",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon index.js"
-  },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "bcrypt-nodejs": "0.0.3",
-    "body-parser": "^1.17.1",
-    "cors": "^2.8.3",
-    "express": "^4.15.2",
-    "jwt-simple": "^0.5.1",
-    "mongoose": "^4.9.8",
-    "morgan": "^1.8.1",
-    "node-spotify-api": "^1.0.7",
-    "nodemon": "^1.11.0",
-    "passport": "^0.3.2",
-    "passport-jwt": "^2.2.1",
-    "passport-local": "^1.0.0",
-    "underscore": "^1.8.3"
-  }
+	"name": "server",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"dev": "nodemon index.js"
+	},
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"bcrypt-nodejs": "0.0.3",
+		"body-parser": "^1.17.1",
+		"cors": "^2.8.3",
+		"express": "^4.15.2",
+		"jwt-simple": "^0.5.1",
+		"mongoose": "^5.0.6",
+		"morgan": "^1.8.1",
+		"node-spotify-api": "^1.0.7",
+		"nodemon": "^1.11.0",
+		"passport": "^0.3.2",
+		"passport-jwt": "^2.2.1",
+		"passport-local": "^1.0.0",
+		"underscore": "^1.8.3"
+	}
 }

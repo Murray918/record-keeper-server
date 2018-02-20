@@ -14,9 +14,9 @@ module.exports = function(app) {
 	app.post('/signup', Authentication.signup);
 	app.post('/signin', requireSignIn, Authentication.signin);
 	app.get('/spotify/:type/:query', spotify.search);
-	app.post('/addRecord', userCollection.addRecord);
-	app.post('/removeRecord', userCollection.removeRecord);
-	app.get('/viewRecords/:id', userCollection.viewRecords);
-	app.post('updateuser/:id', userCollection.updateUser);
-	app.post('deleteuser/:id', userCollection.deleteUser);
+	app.post('/addrecord', userCollection.addRecord);
+	app.post('/removerecord', userCollection.removeRecord);
+	app.get('/viewrecords/:email', userCollection.viewRecords);
+	app.post('updateuser/:email', userCollection.updateUser);
+	app.post('deleteuser/:email', userCollection.deleteUser);
 };
