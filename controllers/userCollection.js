@@ -1,6 +1,5 @@
+'use strict';
 const User = require('../models/user');
-const mongoose = require('mongoose');
-const ObjectId = require('mongoose').ObjectId;
 
 exports.addRecord = function(req, res) {
 	//get the and email record from request
@@ -61,6 +60,12 @@ exports.updateUser = function(req, res) {
 };
 
 exports.deleteUser = function(req, res) {
-	//TODO remove a user from db
-	res.send('this endpoint is under construction');
+	let email = req.body.email;
+	User.remove({ email: email }, function(err, user) {
+		if (err) {
+			res.send(err);
+		}
+		console.log(user);
+		res.send('User profile has been deleted');
+	});
 };
