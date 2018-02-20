@@ -17,6 +17,6 @@ module.exports = function(app) {
 	app.post('/addrecord', userCollection.addRecord);
 	app.post('/removerecord', userCollection.removeRecord);
 	app.get('/viewrecords/:email', userCollection.viewRecords);
-	// app.post('updateuser/:email', userCollection.updateUser);
+	app.post('/updateuser', userCollection.updateUser);
 	app.post('/deleteuser', userCollection.deleteUser);
 };

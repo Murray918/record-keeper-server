@@ -55,8 +55,19 @@ exports.viewRecords = function(req, res) {
 };
 
 exports.updateUser = function(req, res) {
-	//TODO update a users profile information
-	res.send('this endpoint is under construction');
+	let email = req.body.email;
+	let password = req.body.password;
+	if (!password) {
+		return res.status(422).send({ error: 'You must provide new password' });
+	}
+	User.findOne({ email: email }, function(err, user) {
+		if (err) {
+			res.send(err);
+		}
+		user.password = password;
+		user.save();
+		res.status(200).send('Success password updated');
+	});
 };
 
 exports.deleteUser = function(req, res) {
