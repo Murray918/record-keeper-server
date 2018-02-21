@@ -3,7 +3,8 @@ const User = require('../models/user');
 
 exports.addRecord = function(req, res) {
 	//get the and email record from request
-	let record = req.body.record;
+	console.log(req.body);
+	let record = req.body.album;
 	let email = req.body.email;
 
 	//find the user the record belongs to
@@ -64,6 +65,7 @@ exports.updateUser = function(req, res) {
 		if (err) {
 			res.send(err);
 		}
+		//set
 		user.password = password;
 		user.save();
 		res.status(200).send('Success password updated');
