@@ -8,9 +8,7 @@ const passport = require('passport'),
 // Create local strategy
 const localOptions = { usernameField: 'email' },
 	localLogin = new LocalStrategy(localOptions, function(email, password, done) {
-		// Verify this email and password, call done with the user
-		// if it is correct email and password
-		// otherwise call done with false
+		// Verify this email and password, call done with the user if it is correct email and password
 		User.findOne({ email: email }, function(err, user) {
 			if (err) {
 				return done(err);
@@ -22,6 +20,7 @@ const localOptions = { usernameField: 'email' },
 				if (err) {
 					return done(err);
 				}
+				// otherwise call done with false
 				if (!isMatch) {
 					return done(null, false);
 				}
@@ -32,25 +31,22 @@ const localOptions = { usernameField: 'email' },
 	});
 
 // Setup options for JWT strategy
-
 const jwtOptions = {
 	jwtFromRequest: ExtractJwt.fromHeader('authorization'),
 	secretOrKey: config.secret
 };
 
 // Create jwt strategy
-
 const jwtLogin = new JwtStrategy(jwtOptions, function(payload, done) {
-	// See if the user ID in the payload exists in our database
-	// If it does, call 'done' with that other
-	// otherwise, call done without a user object
 	User.findById(payload.sub, function(err, user) {
+		// If it does, call 'done' with that other
 		if (err) {
 			return done(err, false);
 		}
-
+		// See if the user ID in the payload exists in our database
 		if (user) {
 			done(null, user);
+			// otherwise, call done without a user object
 		} else {
 			done(null, false);
 		}

@@ -9,8 +9,7 @@ const requireSignIn = passport.authenticate('local', { session: false });
 
 module.exports = function(app) {
 	app.get('/', requireAuth, function(req, res, next) {
-		console.log('party with this route first');
-		res.send({ message: 'bingBangBoop I am behind you!' });
+		res.send({ message: 'Welcome to our site!' });
 	});
 	app.post('/signup', Authentication.signup);
 	app.post('/signin', requireSignIn, Authentication.signin);
@@ -18,6 +17,11 @@ module.exports = function(app) {
 	app.post('/addrecord', requireAuth, userCollection.addRecord);
 	app.post('/removerecord', requireAuth, userCollection.removeRecord);
 	app.get('/viewrecords/:email', requireAuth, userCollection.viewRecords);
-	app.post('/updateuser', requireAuth, userCollection.updateUser);
+	app.post('/updateuseremail', requireAuth, userCollection.updateUserEmail);
+	app.post(
+		'/updateuserpassword',
+		requireAuth,
+		userCollection.updateUserPassword
+	);
 	app.post('/deleteuser', requireAuth, userCollection.deleteUser);
 };

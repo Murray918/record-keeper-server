@@ -10,7 +10,7 @@ const express = require('express'),
 mongoose.Promise = require('bluebird');
 mongoose.connect('mongodb://localhost:27017/auth');
 //this prepares our app
-app.use(morgan('combined'));
+app.use(morgan('dev'));
 app.use(cors());
 app.use(bodyparser.json({ type: '*/*' }));
 router(app);

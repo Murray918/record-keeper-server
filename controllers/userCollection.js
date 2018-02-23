@@ -29,15 +29,18 @@ exports.addRecord = function(req, res) {
 exports.removeRecord = function(req, res) {
 	let recordId = req.body.id;
 	let email = req.body.email;
+	console.log('record id : ', recordId);
 	User.findOne({ email: email }, function(err, user) {
 		if (err) {
 			res.send(err);
 		}
-		//get the album and remove it
+		//this one is trickey make sure the targed is the correct id i.e  record._id
+		//this should be filted on the front end
 		console.log(
 			'<<<<<<<<<<<<<<<<<LOOK!>>>>>>>>>>>>>>>>>>>>>',
 			user.records.id(recordId)
 		);
+		//remove the record with the target id
 		user.records.id(recordId).remove();
 		user.save();
 		res.status(200).send('The record was removed');
@@ -55,7 +58,24 @@ exports.viewRecords = function(req, res) {
 	});
 };
 
-exports.updateUser = function(req, res) {
+exports.updateUserEmail = function(req, res) {
+	let email = req.body.email;
+	let password = req.body.password;
+	if (!email || !password) {
+		return res.status(422).send({ error: 'You must provide new Email' });
+	}
+	User.findOne({ email: email }, function(err, user) {
+		if (err) {
+			res.send(err);
+		}
+		//set
+		user.email = email;
+		user.save();
+		res.status(200).send('Success email updated');
+	});
+};
+
+exports.updateUserPassword = function(req, res) {
 	let email = req.body.email;
 	let password = req.body.password;
 	if (!password) {
