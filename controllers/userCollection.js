@@ -59,17 +59,22 @@ exports.viewRecords = function(req, res) {
 };
 
 exports.updateUserEmail = function(req, res) {
-	let email = req.body.email;
-	let password = req.body.password;
-	if (!email || !password) {
+	//set the email from the request
+	let email = req.body.oldEmail;
+	let newEmail = req.body.newEmail;
+	// secpmd test to see if the email exists
+	console.log(req.body);
+	if (!newEmail) {
 		return res.status(422).send({ error: 'You must provide new Email' });
 	}
+
+	//make sure that the does not exise
 	User.findOne({ email: email }, function(err, user) {
 		if (err) {
 			res.send(err);
 		}
-		//set
-		user.email = email;
+		//set and save the new email
+		user.email = newEmail;
 		user.save();
 		res.status(200).send('Success email updated');
 	});
