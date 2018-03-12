@@ -5,10 +5,11 @@ const express = require('express'),
 	app = express(),
 	router = require('./router'),
 	mongoose = require('mongoose'),
-	cors = require('cors');
+	cors = require('cors'),
+	config = require('config');
 //connection to mongoose and promise set up
 mongoose.Promise = require('bluebird');
-mongoose.connect('mongodb://localhost:27017/auth');
+mongoose.connect(config.MONGODB_URI);
 //this prepares our app
 app.use(morgan('dev'));
 app.use(cors());
