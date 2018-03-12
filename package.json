@@ -1,17 +1,18 @@
 {
 	"name": "server",
 	"version": "1.0.0",
-	"description": "",
+	"description": "Record-Keeper server V1",
 	"main": "index.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"dev": "nodemon index.js"
 	},
-	"author": "",
+	"author": "Andrew Murray",
 	"license": "ISC",
 	"dependencies": {
 		"bcrypt-nodejs": "0.0.3",
 		"body-parser": "^1.17.1",
+		"cluster": "^0.7.7",
 		"cors": "^2.8.3",
 		"express": "^4.15.2",
 		"jwt-simple": "^0.5.1",
@@ -19,6 +20,7 @@
 		"morgan": "^1.8.1",
 		"node-spotify-api": "^1.0.7",
 		"nodemon": "^1.15.1",
+		"num-cpus": "^1.1.0",
 		"passport": "^0.3.2",
 		"passport-jwt": "^2.2.1",
 		"passport-local": "^1.0.0",

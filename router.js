@@ -24,4 +24,10 @@ module.exports = function(app) {
 		userCollection.updateUserPassword
 	);
 	app.post('/deleteuser', requireAuth, userCollection.deleteUser);
+	// All remaining requests return the React app, so it can handle routing.
+	app.get('*', function(request, response) {
+		response.sendFile(
+			path.resolve(__dirname, '../react-u/build', 'index.html')
+		);
+	});
 };
