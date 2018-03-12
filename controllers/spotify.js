@@ -20,7 +20,7 @@ exports.search = function(req, res) {
 	spotify
 		//type takes either album, artist, track
 		// query takes your search
-		.search({ type: req.params.type, query: req.params.query, limit: 10 })
+		.search({ type: req.params.type, query: req.params.query, limit: 18 })
 		.then(function(response) {
 			// console.log(response);
 			//extract only the information that will be used by client
