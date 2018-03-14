@@ -5,18 +5,27 @@ const express = require('express'),
 	app = express(),
 	router = require('./router'),
 	mongoose = require('mongoose'),
-	cors = require('cors'),
-	config = require('config');
+	mongodb = require('mongodb'),
+	cors = require('cors');
 //connection to mongoose and promise set up
 mongoose.Promise = require('bluebird');
-mongoose.connect(config.MONGODB_URI);
-//this prepares our app
-app.use(morgan('dev'));
-app.use(cors());
-app.use(bodyparser.json({ type: '*/*' }));
-router(app);
-//this runs the server and tells it to listen on the given port
-const port = process.env.PORT || 3090,
-	server = http.createServer(app);
-server.listen(port);
-console.log('Server listening on:', port);
+mongodb.MongoClient.connect(process.env.MONGODB_URI, function(err, database) {
+	if (err) {
+		console.log(err);
+		process.exit(1);
+	}
+	//this prepares our app
+	app.use(morgan('dev'));
+	app.use(cors());
+	app.use(bodyparser.json({ type: '*/*' }));
+	router(app);
+	//this runs the server and tells it to listen on the given port
+	// Initialize the app.
+	var server = app.listen(process.env.PORT || 8080, function() {
+		var port = server.address().port;
+		console.log('App now running on port', port);
+	});
+});
+
+// heroku	https://git.heroku.com/young-journey-11063.git (fetch)
+// heroku	https://git.heroku.com/young-journey-11063.git (push)
