@@ -9,11 +9,12 @@ const express = require('express'),
 	cors = require('cors');
 //connection to mongoose and promise set up
 mongoose.Promise = require('bluebird');
-mongodb.MongoClient.connect(process.env.MONGODB_URI, function(err, database) {
+mongoose.connect(process.env.MONGODB_URI, function(err, database) {
 	if (err) {
 		console.log(err);
 		process.exit(1);
 	}
+	console.log(process.env);
 	//this prepares our app
 	app.use(morgan('dev'));
 	app.use(cors());
