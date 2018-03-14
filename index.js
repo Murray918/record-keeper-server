@@ -14,7 +14,6 @@ mongoose.connect(process.env.MONGODB_URI, function(err, database) {
 		console.log(err);
 		process.exit(1);
 	}
-	console.log(process.env);
 	//this prepares our app
 	app.use(morgan('dev'));
 	app.use(cors());
