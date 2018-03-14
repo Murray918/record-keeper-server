@@ -14,10 +14,16 @@ mongoose.connect(process.env.MONGODB_URI, function(err, database) {
 		console.log(err);
 		process.exit(1);
 	}
+
+	const logger = function(req, res, next) {
+		console.log(JSON.stringify(req.body, null, 2));
+		next();
+	};
 	//this prepares our app
 	app.use(morgan('dev'));
 	app.use(cors());
 	app.use(bodyparser.json({ type: '*/*' }));
+	app.use(logger);
 	router(app);
 	//this runs the server and tells it to listen on the given port
 	// Initialize the app.
