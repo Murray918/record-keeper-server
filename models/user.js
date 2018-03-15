@@ -30,11 +30,11 @@ UserShcema.pre('save', function(next) {
 	// 		return next(err);
 	// 	}
 
-	bcrypt.hash(user.password, null, function(err, hash) {
+	bcrypt.hash(user.password, null, null, function(err, hash) {
 		if (err) {
 			return next(err);
 		}
-
+		console.log('here is our authentication hash :', hash);
 		user.password = hash;
 		next();
 	});
