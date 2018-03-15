@@ -10,6 +10,11 @@ const passport = require('passport'),
 const localOptions = { usernameField: 'email' },
 	localLogin = new LocalStrategy(localOptions, function(email, password, done) {
 		// Verify this email and password, call done with the user if it is correct email and password
+		console.log(
+			'this is the email and password in passport.localLogin: ',
+			email,
+			password
+		);
 		User.findOne({ email: email }, function(err, user) {
 			if (err) {
 				return done(err);
@@ -27,7 +32,6 @@ const localOptions = { usernameField: 'email' },
 				}
 				return done(null, user);
 			});
-			// compare passwords - is `password` equal to user.password?
 		});
 	});
 
