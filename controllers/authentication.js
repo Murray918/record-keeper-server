@@ -1,8 +1,7 @@
 const jwt = require('jwt-simple');
 const User = require('../models/user');
-// const config = require('../config');
-//herolu access to our secret
-const secret = process.env.LOCAL_SECRET;
+//herolu access to our secret or our local config file
+const secret = process.env.LOCAL_SECRET || require('../config').secret;
 
 function tokenForUser(user) {
 	const timestamp = new Date().getTime();

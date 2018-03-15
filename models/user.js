@@ -25,20 +25,20 @@ const UserShcema = new Schema({
 UserShcema.pre('save', function(next) {
 	console.log('is it hitting the hash');
 	const user = this;
-	bcrypt.genSalt(10, function(err, salt) {
+	// bcrypt.genSalt(10, function(err, salt) {
+	// 	if (err) {
+	// 		return next(err);
+	// 	}
+
+	bcrypt.hash(user.password, null, function(err, hash) {
 		if (err) {
 			return next(err);
 		}
 
-		bcrypt.hash(user.password, salt, null, function(err, hash) {
-			if (err) {
-				return next(err);
-			}
-
-			user.password = hash;
-			next();
-		});
+		user.password = hash;
+		next();
 	});
+	// });
 });
 
 UserShcema.methods.comparePassword = function(candidatePassword, callback) {

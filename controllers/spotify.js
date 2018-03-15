@@ -1,12 +1,8 @@
-// const config = require('../config');
 const Spotify = require('node-spotify-api');
-
-// client_id = config.CLIENT_ID; // Your client id
-// client_secret = config.CLIENT_SECRET; // Your secret
-// redirect_uri = 'REDIRECT_URI'; // Your redirect uri
-//these are the variables for heroku
-const client_id = process.env.CLIENT_ID;
-const client_secret = process.env.CLIENT_SECRET;
+//these are the variables for heroku and our local config
+const client_id = process.env.CLIENT_ID || require('../config').CLIENT_SECRET;
+const client_secret =
+	process.env.CLIENT_SECRET || require('../config').CLIENT_SECRET;
 
 exports.search = function(req, res) {
 	console.log('at the top', req.params);
