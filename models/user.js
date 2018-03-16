@@ -43,6 +43,13 @@ UserShcema.pre('save', function(next) {
 
 UserShcema.methods.comparePassword = function(candidatePassword, callback) {
 	bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
+		console.log(isMatch);
+		console.log(
+			'user.js line 47: ',
+			bcrypt.hash(candidatePassword, null, null, function(err, hash) {
+				return hash;
+			})
+		);
 		if (err) {
 			return callback(err);
 		}
