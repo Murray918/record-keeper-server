@@ -24,9 +24,7 @@ const UserShcema = new Schema({
 // On Save Hook, encrypt password
 
 UserShcema.pre('save', function(next) {
-	console.log('this is our user :', this);
 	const user = this;
-	console.log('this is our this: ', user);
 	// bcrypt.genSalt(10, function(err, salt) {
 	// 	if (err) {
 	// 		return next(err);
@@ -45,16 +43,9 @@ UserShcema.pre('save', function(next) {
 
 UserShcema.methods.comparePassword = function(candidatePassword, callback) {
 	bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
-		console.log('this is our user :', this);
 		if (err) {
 			return callback(err);
 		}
-		console.log(
-			'this.password : ',
-			this.password,
-			'candidatePassword : ',
-			candidatePassword
-		);
 		callback(null, isMatch);
 	});
 };

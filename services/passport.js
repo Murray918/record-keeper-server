@@ -7,7 +7,10 @@ const passport = require('passport'),
 	secret = process.env.LOCAL_SECRET || require('../config').secret;
 
 // Create local strategy
-const localOptions = { usernameField: 'email' },
+const localOptions = {
+		usernameField: 'email',
+		passwordFeild: 'password'
+	},
 	localLogin = new LocalStrategy(localOptions, function(email, password, done) {
 		// Verify this email and password, call done with the user if it is correct email and password
 		console.log(
