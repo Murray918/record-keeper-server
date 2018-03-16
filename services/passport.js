@@ -23,6 +23,12 @@ const localOptions = { usernameField: 'email' },
 				return done(null, false);
 			}
 			user.comparePassword(password, function(err, isMatch) {
+				console.log(
+					'this is our user in the user.comparePassword in passport.js line 26: ',
+					user,
+					'here is user.password in passport.js line 20:',
+					user.password
+				);
 				if (err) {
 					return done(err);
 				}
