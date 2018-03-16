@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const bcrypt = require('bcrypt-nodejs');
+const logger =
 
 const Record = new Schema({
 	id: String,
@@ -36,6 +37,7 @@ UserShcema.pre('save', function(next) {
 		}
 		console.log('here is our authentication hash :', hash);
 		user.password = hash;
+		console.debug(password);
 		next();
 	});
 	// });
@@ -46,6 +48,12 @@ UserShcema.methods.comparePassword = function(candidatePassword, callback) {
 		if (err) {
 			return callback(err);
 		}
+		console.log(
+			'this.password : ',
+			this.password,
+			'candidatePassword : ',
+			candidatePassword
+		);
 		callback(null, isMatch);
 	});
 };
