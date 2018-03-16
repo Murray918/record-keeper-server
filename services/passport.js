@@ -24,8 +24,8 @@ const localOptions = { usernameField: 'email' },
 			}
 			user.comparePassword(password, function(err, isMatch) {
 				console.log(
-					'this is our user in the user.comparePassword in passport.js line 26: ',
-					user,
+					'here is the password to compare passport.js line 27:',
+					password,
 					'here is user.password in passport.js line 20:',
 					user.password
 				);
