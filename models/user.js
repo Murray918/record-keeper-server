@@ -24,8 +24,9 @@ const UserShcema = new Schema({
 // On Save Hook, encrypt password
 
 UserShcema.pre('save', function(next) {
-	console.log('is it hitting the hash');
+	console.log('this is our user :', this);
 	const user = this;
+	console.log('this is our this: ', user);
 	// bcrypt.genSalt(10, function(err, salt) {
 	// 	if (err) {
 	// 		return next(err);
@@ -37,7 +38,6 @@ UserShcema.pre('save', function(next) {
 		}
 		console.log('here is our authentication hash :', hash);
 		user.password = hash;
-		console.debug(password);
 		next();
 	});
 	// });
