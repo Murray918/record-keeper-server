@@ -35,7 +35,6 @@ exports.search = function(req, res) {
 					uri: album.uri
 				});
 			});
-			console.log('data has been extracted!!!');
 			res.send(dataArray);
 		});
 };

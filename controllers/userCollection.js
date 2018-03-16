@@ -3,7 +3,6 @@ const User = require('../models/user');
 
 exports.addRecord = function(req, res) {
 	//get the and email record from request
-	console.log(req.body);
 	let record = req.body.album;
 	let email = req.body.email;
 
@@ -29,7 +28,6 @@ exports.addRecord = function(req, res) {
 exports.removeRecord = function(req, res) {
 	let recordId = req.body.id;
 	let email = req.body.email;
-	console.log('record id : ', recordId);
 	User.findOne({ email: email }, function(err, user) {
 		if (err) {
 			res.send(err);
@@ -48,7 +46,6 @@ exports.removeRecord = function(req, res) {
 };
 
 exports.viewRecords = function(req, res) {
-	console.log(req.params);
 	User.findOne({ email: req.params.email }, function(err, user) {
 		if (err) {
 			res.send(err);
@@ -63,7 +60,6 @@ exports.updateUserEmail = function(req, res) {
 	let email = req.body.oldEmail;
 	let newEmail = req.body.newEmail;
 	// secpmd test to see if the email exists
-	console.log(req.body);
 	if (!newEmail) {
 		return res.status(422).send({ error: 'You must provide new Email' });
 	}
@@ -103,7 +99,6 @@ exports.deleteUser = function(req, res) {
 		if (err) {
 			res.send(err);
 		}
-		console.log(user);
 		res.send('User profile has been deleted');
 	});
 };
